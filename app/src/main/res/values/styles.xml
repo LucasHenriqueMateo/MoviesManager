@@ -1,0 +1,6 @@
+<resources>
+    <style name="PopupMenuLight" parent="ThemeOverlay.Material3.Light">
+        <item name="android:textColorPrimary">#000000</item>
+        <item name="android:colorBackground">#FFFFFF</item>
+    </style>
+</resources>
