@@ -4,22 +4,30 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="12dp"
-    android:foreground="?attr/selectableItemBackground"
-    android:clickable="true"
-    android:focusable="true">
+    android:gravity="center_vertical"
+    android:foreground="?attr/selectableItemBackground">
 
     <TextView
         android:id="@+id/tvName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textStyle="bold"
-        android:text="Nome do Filme"
-        android:textSize="16sp" />
+        android:text="Filme"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="N/A" />
+        android:text="N/A"
+        android:layout_marginEnd="12dp" />
+
+    <ImageButton
+        android:id="@+id/btnDelete"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:tint="?attr/colorError"
+        android:src="@drawable/ic_delete_24"
+        android:contentDescription="Excluir" />
 </LinearLayout>
