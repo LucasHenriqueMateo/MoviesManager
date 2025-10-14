@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MoviesManager</string>
+    <string name="salvar">Salvar</string>
+    <string name="j_assistido">Já assistido</string>
+    <string name="dura_o_min">Duração (min)</string>
+    <string name="ano_de_lan_amento">Ano de lançamento</string>
+    <string name="nome_nico">Nome (único)</string>
 </resources>
