@@ -3,7 +3,6 @@ package com.example.moviesmanager.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesmanager.R
@@ -12,8 +11,7 @@ import java.text.DecimalFormat
 
 class MovieAdapter(
     private var movieList: List<Movie>,
-    private val onItemClick: (Movie) -> Unit,
-    private val onItemDelete: (Movie) -> Unit
+    private val onItemClick: (Movie) -> Unit
 ) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     private val df = DecimalFormat("#.#")
@@ -21,7 +19,6 @@ class MovieAdapter(
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvName: TextView = itemView.findViewById(R.id.tvName)
         val tvRating: TextView = itemView.findViewById(R.id.tvRating)
-        val btnDelete: ImageButton = itemView.findViewById(R.id.btnDelete)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -34,9 +31,7 @@ class MovieAdapter(
         val movie = movieList[position]
         holder.tvName.text = movie.name
         holder.tvRating.text = movie.rating?.let { df.format(it) } ?: "N/A"
-
         holder.itemView.setOnClickListener { onItemClick(movie) }
-        holder.btnDelete.setOnClickListener { onItemDelete(movie) }
     }
 
     override fun getItemCount(): Int = movieList.size
