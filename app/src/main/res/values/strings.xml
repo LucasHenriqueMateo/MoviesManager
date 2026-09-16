@@ -4,4 +4,13 @@
     <string name="movie_details_format">%1$d · %2$s · %3$d min</string>
     <string name="rating_format">Nota: %1$d</string>
     <string name="no_rating">Sem nota</string>
+    <string name="new_movie">Novo filme</string>
+    <string name="name">Nome</string>
+    <string name="release_year">Ano de lançamento</string>
+    <string name="studio">Estúdio ou produtora</string>
+    <string name="duration">Duração (em minutos)</string>
+    <string name="watched">Assistido</string>
+    <string name="rating">Nota (de 0 a 10)</string>
+    <string name="genre">Gênero</string>
+    <string name="save">Salvar</string>
 </resources>

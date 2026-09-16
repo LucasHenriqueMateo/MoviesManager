@@ -1,0 +1,16 @@
+<resources>
+    <string-array name="genres">
+        <item>Ação</item>
+        <item>Animação</item>
+        <item>Aventura</item>
+        <item>Comédia</item>
+        <item>Documentário</item>
+        <item>Drama</item>
+        <item>Fantasia</item>
+        <item>Ficção científica</item>
+        <item>Musical</item>
+        <item>Romance</item>
+        <item>Suspense</item>
+        <item>Terror</item>
+    </string-array>
+</resources>
