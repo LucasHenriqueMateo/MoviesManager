@@ -13,4 +13,6 @@
     <string name="rating">Nota (de 0 a 10)</string>
     <string name="genre">Gênero</string>
     <string name="save">Salvar</string>
+    <string name="add_movie">Adicionar filme</string>
+    <string name="movie_not_saved">Não foi possível salvar: já existe um filme com esse nome</string>
 </resources>
