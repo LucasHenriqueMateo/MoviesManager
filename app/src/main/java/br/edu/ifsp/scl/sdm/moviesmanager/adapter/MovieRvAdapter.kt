@@ -7,15 +7,23 @@ import androidx.recyclerview.widget.RecyclerView
 import br.edu.ifsp.scl.sdm.moviesmanager.R
 import br.edu.ifsp.scl.sdm.moviesmanager.databinding.TileMovieBinding
 import br.edu.ifsp.scl.sdm.moviesmanager.model.Movie
+import br.edu.ifsp.scl.sdm.moviesmanager.view.OnMovieClickListener
 
 class MovieRvAdapter(
-    private val movieList: MutableList<Movie>
+    private val movieList: MutableList<Movie>,
+    private val onMovieClickListener: OnMovieClickListener
 ) : RecyclerView.Adapter<MovieRvAdapter.MovieViewHolder>() {
     inner class MovieViewHolder(tileMovieBinding: TileMovieBinding) :
         RecyclerView.ViewHolder(tileMovieBinding.root) {
         val nameTv: TextView = tileMovieBinding.nameTv
         val detailsTv: TextView = tileMovieBinding.detailsTv
         val ratingTv: TextView = tileMovieBinding.ratingTv
+
+        init {
+            tileMovieBinding.root.setOnClickListener {
+                onMovieClickListener.onMovieClick(bindingAdapterPosition)
+            }
+        }
     }
 
     override fun getItemCount() = movieList.size

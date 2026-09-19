@@ -18,9 +18,10 @@ import br.edu.ifsp.scl.sdm.moviesmanager.adapter.MovieRvAdapter
 import br.edu.ifsp.scl.sdm.moviesmanager.controller.MainController
 import br.edu.ifsp.scl.sdm.moviesmanager.databinding.ActivityMainBinding
 import br.edu.ifsp.scl.sdm.moviesmanager.model.Constant.EXTRA_MOVIE
+import br.edu.ifsp.scl.sdm.moviesmanager.model.Constant.EXTRA_VIEW_MOVIE
 import br.edu.ifsp.scl.sdm.moviesmanager.model.Movie
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnMovieClickListener {
     private val amb: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     // Adapter
     private val movieAdapter: MovieRvAdapter by lazy {
-        MovieRvAdapter(movieList)
+        MovieRvAdapter(movieList, this)
     }
 
     // Controller
@@ -88,6 +89,13 @@ class MainActivity : AppCompatActivity() {
                 false
             }
         }
+    }
+
+    override fun onMovieClick(position: Int) {
+        startActivity(Intent(this, MovieActivity::class.java).apply {
+            putExtra(EXTRA_MOVIE, movieList[position])
+            putExtra(EXTRA_VIEW_MOVIE, true)
+        })
     }
 
     private fun fillMovieList() {
