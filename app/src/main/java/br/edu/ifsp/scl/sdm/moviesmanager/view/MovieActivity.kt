@@ -46,7 +46,11 @@ class MovieActivity : AppCompatActivity() {
         val viewMovie = intent.getBooleanExtra(EXTRA_VIEW_MOVIE, false)
 
         supportActionBar?.subtitle = getString(
-            if (receivedMovie == null) R.string.new_movie else R.string.movie_details
+            when {
+                receivedMovie == null -> R.string.new_movie
+                viewMovie -> R.string.movie_details
+                else -> R.string.edit_movie
+            }
         )
 
         receivedMovie?.let { movie ->

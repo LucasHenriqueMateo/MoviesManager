@@ -3,6 +3,7 @@ package br.edu.ifsp.scl.sdm.moviesmanager.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import br.edu.ifsp.scl.sdm.moviesmanager.R
 import br.edu.ifsp.scl.sdm.moviesmanager.databinding.TileMovieBinding
@@ -20,8 +21,25 @@ class MovieRvAdapter(
         val ratingTv: TextView = tileMovieBinding.ratingTv
 
         init {
-            tileMovieBinding.root.setOnClickListener {
-                onMovieClickListener.onMovieClick(bindingAdapterPosition)
+            tileMovieBinding.root.apply {
+                setOnCreateContextMenuListener { menu, _, _ ->
+                    (onMovieClickListener as AppCompatActivity).menuInflater.inflate(
+                        R.menu.context_menu_main,
+                        menu
+                    )
+
+                    menu.findItem(R.id.editMovieMi).setOnMenuItemClickListener {
+                        onMovieClickListener.onEditMovieMenuItemClick(bindingAdapterPosition)
+                        true
+                    }
+
+                    menu.findItem(R.id.removeMovieMi).setOnMenuItemClickListener {
+                        onMovieClickListener.onRemoveMovieMenuItemClick(bindingAdapterPosition)
+                        true
+                    }
+                }
+
+                setOnClickListener { onMovieClickListener.onMovieClick(bindingAdapterPosition) }
             }
         }
     }

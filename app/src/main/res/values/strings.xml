@@ -16,4 +16,7 @@
     <string name="add_movie">Adicionar filme</string>
     <string name="movie_not_saved">Não foi possível salvar: já existe um filme com esse nome</string>
     <string name="movie_details">Detalhes do filme</string>
+    <string name="edit_movie">Editar filme</string>
+    <string name="remove_movie">Remover filme</string>
+    <string name="movie_removed">Filme removido</string>
 </resources>

@@ -60,7 +60,9 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener {
                     IntentCompat.getParcelableExtra(it, EXTRA_MOVIE, Movie::class.java)
                 }
                 movie?.let { receivedMovie ->
-                    if (mainController.insertMovie(receivedMovie) == -1L) {
+                    if (movieList.any { it.name.equals(receivedMovie.name, ignoreCase = true) }) {
+                        mainController.modifyMovie(receivedMovie)
+                    } else if (mainController.insertMovie(receivedMovie) == -1L) {
                         Toast.makeText(this, getString(R.string.movie_not_saved), Toast.LENGTH_SHORT).show()
                     }
                     fillMovieList()
@@ -95,6 +97,18 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener {
         startActivity(Intent(this, MovieActivity::class.java).apply {
             putExtra(EXTRA_MOVIE, movieList[position])
             putExtra(EXTRA_VIEW_MOVIE, true)
+        })
+    }
+
+    override fun onRemoveMovieMenuItemClick(position: Int) {
+        mainController.removeMovie(movieList[position].name)
+        fillMovieList()
+        Toast.makeText(this, getString(R.string.movie_removed), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onEditMovieMenuItemClick(position: Int) {
+        marl.launch(Intent(this, MovieActivity::class.java).apply {
+            putExtra(EXTRA_MOVIE, movieList[position])
         })
     }
 
