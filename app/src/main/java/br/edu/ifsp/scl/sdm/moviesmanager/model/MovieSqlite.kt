@@ -52,7 +52,14 @@ class MovieSqlite(context: Context) : MovieDao {
     override fun createMovie(movie: Movie): Long =
         movieDatabase.insert(MOVIE_TABLE, null, movie.toContentValues())
 
-    override fun retrieveMovies(): MutableList<Movie> {
+    override fun retrieveMovies(order: MovieOrder): MutableList<Movie> {
+        // Ordenacao feita pelo proprio banco. Em ordem decrescente o SQLite coloca
+        // os valores nulos por ultimo, entao os filmes sem nota ficam no fim da lista.
+        val orderBy = when (order) {
+            MovieOrder.NAME -> "$NAME_COLUMN ASC"
+            MovieOrder.RATING -> "$RATING_COLUMN DESC, $NAME_COLUMN ASC"
+        }
+
         val movieList: MutableList<Movie> = mutableListOf()
         movieDatabase.query(
             MOVIE_TABLE,
@@ -61,7 +68,7 @@ class MovieSqlite(context: Context) : MovieDao {
             null,
             null,
             null,
-            "$NAME_COLUMN ASC"
+            orderBy
         ).use { cursor ->
             while (cursor.moveToNext()) {
                 movieList.add(cursor.toMovie())

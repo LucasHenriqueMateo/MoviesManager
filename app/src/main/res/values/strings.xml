@@ -19,4 +19,6 @@
     <string name="edit_movie">Editar filme</string>
     <string name="remove_movie">Remover filme</string>
     <string name="movie_removed">Filme removido</string>
+    <string name="sort_by_name">Ordenar por nome</string>
+    <string name="sort_by_rating">Ordenar por nota</string>
 </resources>

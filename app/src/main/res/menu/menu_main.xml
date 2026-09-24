@@ -6,4 +6,12 @@
         android:icon="@drawable/ic_add"
         android:title="@string/add_movie"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/sortByNameMi"
+        android:title="@string/sort_by_name"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/sortByRatingMi"
+        android:title="@string/sort_by_rating"
+        app:showAsAction="never" />
 </menu>

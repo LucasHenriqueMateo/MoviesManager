@@ -20,6 +20,7 @@ import br.edu.ifsp.scl.sdm.moviesmanager.databinding.ActivityMainBinding
 import br.edu.ifsp.scl.sdm.moviesmanager.model.Constant.EXTRA_MOVIE
 import br.edu.ifsp.scl.sdm.moviesmanager.model.Constant.EXTRA_VIEW_MOVIE
 import br.edu.ifsp.scl.sdm.moviesmanager.model.Movie
+import br.edu.ifsp.scl.sdm.moviesmanager.model.MovieOrder
 
 class MainActivity : AppCompatActivity(), OnMovieClickListener {
     private val amb: ActivityMainBinding by lazy {
@@ -38,6 +39,9 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener {
     private val mainController: MainController by lazy {
         MainController(this)
     }
+
+    // Ordenacao atual da lista
+    private var movieOrder = MovieOrder.NAME
 
     private lateinit var marl: ActivityResultLauncher<Intent>
 
@@ -87,6 +91,16 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener {
                 marl.launch(Intent(this, MovieActivity::class.java))
                 true
             }
+            R.id.sortByNameMi -> {
+                movieOrder = MovieOrder.NAME
+                fillMovieList()
+                true
+            }
+            R.id.sortByRatingMi -> {
+                movieOrder = MovieOrder.RATING
+                fillMovieList()
+                true
+            }
             else -> {
                 false
             }
@@ -112,9 +126,12 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener {
         })
     }
 
+    // O banco e a fonte da verdade: apos qualquer alteracao a lista e recarregada,
+    // ja na ordenacao escolhida pelo usuario.
     private fun fillMovieList() {
+        val order = movieOrder
         Thread {
-            val movies = mainController.getMovies()
+            val movies = mainController.getMovies(order)
             runOnUiThread {
                 movieList.clear()
                 movieList.addAll(movies)
