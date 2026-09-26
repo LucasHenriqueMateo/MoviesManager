@@ -12,12 +12,18 @@ import androidx.core.view.WindowInsetsCompat
 import br.edu.ifsp.scl.sdm.moviesmanager.R
 import br.edu.ifsp.scl.sdm.moviesmanager.databinding.ActivityMovieBinding
 import br.edu.ifsp.scl.sdm.moviesmanager.model.Constant.EXTRA_MOVIE
+import br.edu.ifsp.scl.sdm.moviesmanager.model.Constant.EXTRA_MOVIE_NAMES
 import br.edu.ifsp.scl.sdm.moviesmanager.model.Constant.EXTRA_VIEW_MOVIE
 import br.edu.ifsp.scl.sdm.moviesmanager.model.Movie
 
 class MovieActivity : AppCompatActivity() {
     private val amvb: ActivityMovieBinding by lazy {
         ActivityMovieBinding.inflate(layoutInflater)
+    }
+
+    // Nomes ja cadastrados, usados para garantir que o nome do novo filme seja unico
+    private val existingNames: List<String> by lazy {
+        intent.getStringArrayListExtra(EXTRA_MOVIE_NAMES) ?: arrayListOf()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,19 +89,61 @@ class MovieActivity : AppCompatActivity() {
         }
 
         amvb.saveBt.setOnClickListener {
-            with(amvb) {
-                val movie = Movie(
-                    name = nameEt.text.toString().trim(),
-                    releaseYear = releaseYearEt.text.toString().toIntOrNull() ?: 0,
-                    studio = studioEt.text.toString().trim(),
-                    duration = durationEt.text.toString().toIntOrNull() ?: 0,
-                    watched = watchedCb.isChecked,
-                    rating = ratingEt.text.toString().trim().toIntOrNull(),
-                    genre = genreSp.selectedItem.toString()
-                )
-                setResult(RESULT_OK, Intent().putExtra(EXTRA_MOVIE, movie))
-                finish()
+            if (validateFields(receivedMovie == null)) {
+                with(amvb) {
+                    val movie = Movie(
+                        name = nameEt.text.toString().trim(),
+                        releaseYear = releaseYearEt.text.toString().toInt(),
+                        studio = studioEt.text.toString().trim(),
+                        duration = durationEt.text.toString().toInt(),
+                        watched = watchedCb.isChecked,
+                        rating = ratingEt.text.toString().trim().toIntOrNull(),
+                        genre = genreSp.selectedItem.toString()
+                    )
+                    setResult(RESULT_OK, Intent().putExtra(EXTRA_MOVIE, movie))
+                    finish()
+                }
             }
         }
+    }
+
+    private fun validateFields(newMovie: Boolean): Boolean {
+        var valid = true
+        with(amvb) {
+            val name = nameEt.text.toString().trim()
+            if (name.isEmpty()) {
+                nameEt.error = getString(R.string.required_field)
+                valid = false
+            } else if (newMovie && existingNames.any { it.equals(name, ignoreCase = true) }) {
+                nameEt.error = getString(R.string.name_already_exists)
+                valid = false
+            }
+
+            if (releaseYearEt.text.toString().toIntOrNull() == null) {
+                releaseYearEt.error = getString(R.string.required_field)
+                valid = false
+            }
+
+            if (studioEt.text.toString().trim().isEmpty()) {
+                studioEt.error = getString(R.string.required_field)
+                valid = false
+            }
+
+            val duration = durationEt.text.toString().toIntOrNull()
+            if (duration == null || duration <= 0) {
+                durationEt.error = getString(R.string.invalid_duration)
+                valid = false
+            }
+
+            val ratingText = ratingEt.text.toString().trim()
+            if (ratingText.isNotEmpty()) {
+                val rating = ratingText.toIntOrNull()
+                if (rating == null || rating !in 0..10) {
+                    ratingEt.error = getString(R.string.invalid_rating)
+                    valid = false
+                }
+            }
+        }
+        return valid
     }
 }

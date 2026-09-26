@@ -18,6 +18,7 @@ import br.edu.ifsp.scl.sdm.moviesmanager.adapter.MovieRvAdapter
 import br.edu.ifsp.scl.sdm.moviesmanager.controller.MainController
 import br.edu.ifsp.scl.sdm.moviesmanager.databinding.ActivityMainBinding
 import br.edu.ifsp.scl.sdm.moviesmanager.model.Constant.EXTRA_MOVIE
+import br.edu.ifsp.scl.sdm.moviesmanager.model.Constant.EXTRA_MOVIE_NAMES
 import br.edu.ifsp.scl.sdm.moviesmanager.model.Constant.EXTRA_VIEW_MOVIE
 import br.edu.ifsp.scl.sdm.moviesmanager.model.Movie
 import br.edu.ifsp.scl.sdm.moviesmanager.model.MovieOrder
@@ -88,7 +89,9 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.addMovieMi -> {
-                marl.launch(Intent(this, MovieActivity::class.java))
+                marl.launch(Intent(this, MovieActivity::class.java).apply {
+                    putStringArrayListExtra(EXTRA_MOVIE_NAMES, ArrayList(movieList.map { it.name }))
+                })
                 true
             }
             R.id.sortByNameMi -> {

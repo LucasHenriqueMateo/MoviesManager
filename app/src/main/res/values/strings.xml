@@ -14,11 +14,15 @@
     <string name="genre">Gênero</string>
     <string name="save">Salvar</string>
     <string name="add_movie">Adicionar filme</string>
-    <string name="movie_not_saved">Não foi possível salvar: já existe um filme com esse nome</string>
     <string name="movie_details">Detalhes do filme</string>
     <string name="edit_movie">Editar filme</string>
     <string name="remove_movie">Remover filme</string>
     <string name="movie_removed">Filme removido</string>
     <string name="sort_by_name">Ordenar por nome</string>
     <string name="sort_by_rating">Ordenar por nota</string>
+    <string name="movie_not_saved">Não foi possível salvar: já existe um filme com esse nome</string>
+    <string name="required_field">Campo obrigatório</string>
+    <string name="name_already_exists">Já existe um filme com esse nome</string>
+    <string name="invalid_duration">Informe a duração em minutos (maior que zero)</string>
+    <string name="invalid_rating">A nota deve ser um número inteiro de 0 a 10</string>
 </resources>
