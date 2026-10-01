@@ -117,13 +117,13 @@ class MainActivity : AppCompatActivity(), OnMovieClickListener {
         })
     }
 
-    override fun onRemoveMovieMenuItemClick(position: Int) {
+    override fun onRemoveMovieClick(position: Int) {
         mainController.removeMovie(movieList[position].name)
         fillMovieList()
         Toast.makeText(this, getString(R.string.movie_removed), Toast.LENGTH_SHORT).show()
     }
 
-    override fun onEditMovieMenuItemClick(position: Int) {
+    override fun onEditMovieClick(position: Int) {
         marl.launch(Intent(this, MovieActivity::class.java).apply {
             putExtra(EXTRA_MOVIE, movieList[position])
         })

@@ -8,9 +8,9 @@ ordenar os filmes favoritos do usuário, com persistência local em SQLite.
 - Listagem dos filmes cadastrados, com nome, ano, gênero, duração e nota.
 - Cadastro de novo filme, com seleção do gênero por um `Spinner`.
 - Visualização de todos os detalhes de um filme ao tocar na célula da lista.
-- Edição de um filme pelo menu de contexto (pressionar e segurar a célula) —
-  todos os campos são editáveis, exceto o nome.
-- Remoção de um filme pelo mesmo menu de contexto.
+- Edição de um filme pelo botão de lápis da célula — todos os campos são
+  editáveis, exceto o nome.
+- Remoção de um filme pelo botão de lixeira da célula.
 - Ordenação da lista por nome ou por nota, pelo menu de overflow da toolbar.
 - Validação do formulário: nome obrigatório e único, ano e duração
   obrigatórios, nota opcional entre 0 e 10.

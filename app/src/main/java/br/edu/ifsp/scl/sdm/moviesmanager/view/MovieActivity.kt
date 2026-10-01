@@ -37,6 +37,7 @@ class MovieActivity : AppCompatActivity() {
         }
 
         setSupportActionBar(amvb.toolbarIn.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // Spinner de generos
         val genres = resources.getStringArray(R.array.genres)
@@ -105,6 +106,12 @@ class MovieActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    // Seta de voltar da toolbar: fecha a tela sem salvar, como o voltar do sistema
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     private fun validateFields(newMovie: Boolean): Boolean {
