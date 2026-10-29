@@ -3,6 +3,8 @@
 Aplicativo Android (Kotlin) para cadastrar, visualizar, editar, remover e
 ordenar os filmes favoritos do usuário, com persistência local em SQLite.
 
+[![Assista ao vídeo explicativo do MoviesManager](https://img.youtube.com/vi/Nn0YsVyqOkU/0.jpg)](https://www.youtube.com/watch?v=Nn0YsVyqOkU)
+
 ## Funcionalidades
 
 - Listagem dos filmes cadastrados, com nome, ano, gênero, duração e nota.
